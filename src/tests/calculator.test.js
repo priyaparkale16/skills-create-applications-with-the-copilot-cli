@@ -1,4 +1,4 @@
-const { add, subtract, multiply, divide } = require('../calculator');
+const { add, subtract, multiply, divide, modulo, power, squareRoot } = require('../calculator');
 
 describe('Calculator Functions', () => {
     describe('add', () => {
@@ -92,6 +92,93 @@ describe('Calculator Functions', () => {
         test('throws error on division by zero', () => {
             expect(() => divide(10, 0)).toThrow('Division by zero');
             expect(() => divide(0, 0)).toThrow('Division by zero');
+        });
+    });
+
+    describe('modulo', () => {
+        test('modulo of positive numbers', () => {
+            expect(modulo(10, 3)).toBe(1);
+        });
+
+        test('modulo resulting in zero', () => {
+            expect(modulo(9, 3)).toBe(0);
+        });
+
+        test('modulo with negative numbers', () => {
+            expect(modulo(-10, 3)).toBe(-1);
+            expect(modulo(10, -3)).toBe(1);
+        });
+
+        test('modulo with decimal numbers', () => {
+            expect(modulo(10.5, 3)).toBeCloseTo(1.5);
+        });
+
+        test('modulo with larger dividend', () => {
+            expect(modulo(17, 5)).toBe(2);
+        });
+
+        test('throws error on modulo by zero', () => {
+            expect(() => modulo(10, 0)).toThrow('Modulo by zero');
+        });
+    });
+
+    describe('power', () => {
+        test('power with positive base and exponent', () => {
+            expect(power(2, 3)).toBe(8);
+        });
+
+        test('power with zero exponent', () => {
+            expect(power(5, 0)).toBe(1);
+        });
+
+        test('power with negative exponent', () => {
+            expect(power(2, -1)).toBe(0.5);
+        });
+
+        test('power with fractional result', () => {
+            expect(power(4, 0.5)).toBe(2);
+        });
+
+        test('power with base zero', () => {
+            expect(power(0, 5)).toBe(0);
+        });
+
+        test('power with negative base', () => {
+            expect(power(-2, 3)).toBe(-8);
+        });
+
+        test('power with decimal base', () => {
+            expect(power(1.5, 2)).toBe(2.25);
+        });
+    });
+
+    describe('squareRoot', () => {
+        test('square root of perfect square', () => {
+            expect(squareRoot(16)).toBe(4);
+        });
+
+        test('square root of non-perfect square', () => {
+            expect(squareRoot(2)).toBe(Math.sqrt(2));
+        });
+
+        test('square root of zero', () => {
+            expect(squareRoot(0)).toBe(0);
+        });
+
+        test('square root of decimal number', () => {
+            expect(squareRoot(0.25)).toBe(0.5);
+        });
+
+        test('square root of large number', () => {
+            expect(squareRoot(100)).toBe(10);
+        });
+
+        test('throws error on negative number', () => {
+            expect(() => squareRoot(-1)).toThrow('Square root of negative number');
+        });
+
+        test('throws error on negative decimal', () => {
+            expect(() => squareRoot(-0.5)).toThrow('Square root of negative number');
         });
     });
 });
